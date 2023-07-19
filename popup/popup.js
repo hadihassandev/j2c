@@ -218,6 +218,8 @@ const Popup = {
 			copyCurrentBranchNameButton: document.querySelector(
 				".copy-button-wrapper"
 			),
+			link_github: document.getElementById("link_github"),
+			link_reportBug: document.getElementById("link_report_bug"),
 		};
 
 		storageUtilFunctions.getData("story", function (data) {
@@ -382,6 +384,16 @@ const Popup = {
 				xmlHttp.send();
 			}
 			console.log("J2C-Beta: Popup Branch Name added!");
+		});
+
+		el.link_github.addEventListener("click", function (event) {
+			event.preventDefault();
+			chrome.tabs.create({ url: this.href });
+		});
+
+		el.link_reportBug.addEventListener("click", function (event) {
+			event.preventDefault();
+			chrome.tabs.create({ url: this.href });
 		});
 	},
 };
