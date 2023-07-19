@@ -19,8 +19,8 @@
     <a href="">Get Extension for Firefox</a>
     <br />
     <br />
-    <a href="">Report Bug</a>
+    <a href="https://github.com/hadihassandev/j2c/issues">Report Bug</a>
     ·
-    <a href="">Request Feature</a>
+    <a href="https://github.com/hadihassandev/j2c/pulls">Request Feature</a>
   </p>
 </div>
