@@ -220,6 +220,9 @@ const Popup = {
 			),
 			link_github: document.getElementById("link_github"),
 			link_reportBug: document.getElementById("link_report_bug"),
+			settingsClearCacheAndStorageButton: document.querySelector(
+				".clear-storage-button"
+			),
 		};
 
 		storageUtilFunctions.getData("story", function (data) {
@@ -395,6 +398,14 @@ const Popup = {
 			event.preventDefault();
 			chrome.tabs.create({ url: this.href });
 		});
+
+		el.settingsClearCacheAndStorageButton.addEventListener(
+			"click",
+			function (event) {
+				storageUtilFunctions.clearData();
+				window.close();
+			}
+		);
 	},
 };
 

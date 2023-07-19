@@ -226,6 +226,9 @@ input {
 }
 
 /* Tab -> Settings */
+.settings-wrapper {
+	margin-bottom: 0.5rem;
+}
 .btn {
 	cursor: pointer;
 	background-color: var(--color-primary) !important;
