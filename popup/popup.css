@@ -112,8 +112,6 @@ input {
 }
 
 /* Tab-Contents */
-.tab-contents {
-}
 .tab-content {
 	background: var(--color-background);
 	overflow: hidden;
@@ -129,8 +127,6 @@ input {
 }
 
 /* Tab -> Branch Names */
-.prefixes-wrapper {
-}
 .prefix__row {
 	display: flex;
 	align-items: center;
@@ -229,6 +225,32 @@ input {
 	margin-bottom: 0;
 }
 
-/* Footer */
-.footer {
+/* Tab -> Settings */
+.btn {
+	cursor: pointer;
+	background-color: var(--color-primary) !important;
+	color: var(--color-background) !important;
+	border: none;
+	margin: 0;
+	margin-right: 5px;
+	padding: 5px 10px;
+	border-radius: 3px;
+	min-height: 20px;
+	display: flex;
+	justify-content: center;
 }
+.btn:hover {
+	background-color: var(--color-primary-semi_dark) !important;
+}
+.btn:active {
+	background-color: var(--color-primary) !important;
+}
+.btn a {
+	user-select: none;
+	text-decoration: none;
+	cursor: pointer;
+	text-decoration: none;
+	text-align: center;
+}
+
+/* Footer */
