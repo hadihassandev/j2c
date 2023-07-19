@@ -124,6 +124,9 @@ input {
 	font-weight: bold;
 	margin-bottom: 0.25rem;
 }
+.tab-content-wrapper {
+	margin-bottom: 1rem;
+}
 
 /* Tab -> Branch Names */
 .prefixes-wrapper {
@@ -145,6 +148,56 @@ input {
 }
 .pattern__example-text__soft-text {
 	color: var(--color-text-semi_light);
+}
+.current-branch-name__row-wrapper {
+	display: flex;
+}
+.current-branch-name__row-wrapper input {
+	margin-right: 0.75rem;
+	flex: 1;
+}
+.copy-button-wrapper {
+	background-color: var(--color-primary) !important;
+	border: none;
+	margin: 0;
+	margin-right: 5px;
+	padding: 5px 10px;
+	border-radius: 3px;
+	min-height: 20px;
+}
+.copy-button-wrapper:hover {
+	background-color: var(--color-primary-semi_dark) !important;
+}
+.copy-button-wrapper:active {
+	background-color: var(--color-primary) !important;
+}
+.copy-button {
+	background-color: var(--color-primary) !important;
+	color: var(--color-background) !important;
+}
+.copy-button a {
+	text-decoration: none;
+}
+.copy-button:hover {
+	background-color: var(--color-primary-semi_dark) !important;
+	color: var(--color-background) !important;
+}
+.copy-button:active {
+	background-color: var(--secondary-color-dark) !important;
+	color: var(--color-background) !important;
+}
+.copy-button__icon {
+	margin-top: -1px;
+	display: block;
+	background: url(https://img.icons8.com/sf-regular/22/ffffff/copy.png);
+	width: 22px;
+	height: 22px;
+}
+.copy-button__icon:hover {
+	background: url(https://img.icons8.com/sf-regular-filled/22/ffffff/copy.png);
+}
+.copy-button__icon:active {
+	background: url(https://img.icons8.com/sf-regular/22/ffffff/copy.png);
 }
 
 /* Footer */
