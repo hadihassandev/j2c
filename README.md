@@ -9,7 +9,7 @@
   <p align="center">
     Browser Extension with utilities for Jira
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
+    <a href=""><strong>Explore the docs »</strong></a>
     <br />
     <br />
     <a href="">Get Extension for Chrome</a>
