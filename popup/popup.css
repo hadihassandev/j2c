@@ -156,6 +156,9 @@ input {
 	margin-right: 0.75rem;
 	flex: 1;
 }
+.current-branch-name__text-row-wrapper {
+	display: flex;
+}
 .copy-button-wrapper {
 	background-color: var(--color-primary) !important;
 	border: none;
@@ -198,6 +201,14 @@ input {
 }
 .copy-button__icon:active {
 	background: url(https://img.icons8.com/sf-regular/22/ffffff/copy.png);
+}
+.copied-tooltip {
+	color: var(--color-primary);
+	cursor: default;
+	margin-left: 0.5rem;
+}
+.j2c_hide {
+	display: none;
 }
 
 /* Footer */

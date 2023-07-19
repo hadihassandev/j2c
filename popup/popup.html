@@ -103,12 +103,17 @@
 					</div>
 					<div class="tab-content__title">Current Branch</div>
 					<div class="current-branch-wrapper tab-content-wrapper">
-						<span>Branch Name:</span>
-						<br />
+						<div class="current-branch-name__text-row-wrapper">
+							<span>Branch Name:</span>
+							<div class="copied-tooltip j2c_hide">
+								<span>Copied!</span>
+							</div>
+						</div>
 						<div class="current-branch-name__row-wrapper">
 							<input
 								id="current_branch_name_input"
 								type="text"
+								value=""
 								spellcheck="false"
 							/>
 							<div id="copy_button" class="copy-button-wrapper">
