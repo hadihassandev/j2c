@@ -117,7 +117,7 @@ input {
 .tab-content {
 	background: var(--color-background);
 	overflow: hidden;
-	min-height: 200px;
+	min-height: 4rem;
 	padding: 1rem 1.5rem 1rem 1.5rem;
 }
 .tab-content__title {
@@ -209,6 +209,24 @@ input {
 }
 .j2c_hide {
 	display: none;
+}
+
+/* Tab -> Info */
+.links-wrapper span {
+	margin: 0rem 0.3rem 0rem 0.3rem;
+	font-weight: bold;
+}
+.links-wrapper a {
+	color: var(--color-primary);
+}
+.links-wrapper a:hover {
+	color: var(--color-primary-semi_light);
+}
+.info-wrapper span {
+	font-size: 0.8rem;
+}
+.info-wrapper {
+	margin-bottom: 0;
 }
 
 /* Footer */
