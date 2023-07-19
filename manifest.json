@@ -1,0 +1,40 @@
+{
+	"manifest_version": 2,
+	"name": "J2C-Beta",
+	"version": "4.0.0",
+	"description": "Jira Utilities",
+	"icons": {
+		"16": "icons/J2C_logo_16px.png",
+		"32": "icons/J2C_logo.svg",
+		"48": "icons/J2C_logo.svg",
+		"128": "icons/J2C_logo.svg"
+	},
+	"background": {
+		"scripts": ["background.js"]
+	},
+	"permissions": ["activeTab", "tabs", "storage"],
+	"content_scripts": [
+		{
+			"matches": ["<all_urls>"],
+			"js": ["utils.js", "content.js"],
+			"css": ["injection/injection.css"],
+			"run_at": "document_end"
+		}
+	],
+	"browser_action": {
+		"default_popup": "popup/popup.html"
+	},
+	"commands": {
+		"my-command": {
+			"suggested_key": {
+				"default": "Alt+Shift+C"
+			},
+			"description": "Test Command"
+		}
+	},
+	"web_accessible_resources": [
+		"injection/branchname_injection.html",
+		"global.css",
+		"content.js"
+	]
+}
