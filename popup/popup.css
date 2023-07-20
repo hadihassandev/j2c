@@ -140,6 +140,7 @@ input {
 	min-width: 70%;
 }
 .prefix__row img {
+	width: 1.1rem;
 	margin-right: 0.5rem;
 }
 .pattern-wrapper input {
