@@ -1,4 +1,4 @@
-* {
+* {max
 	box-sizing: border-box;
 }
 .hidden {
@@ -36,6 +36,10 @@ input {
 }
 
 /* Header */
+.sticky {
+	position: sticky;
+	top: 0;
+}
 .header {
 	align-items: center;
 	background: var(--color-primary);
@@ -205,6 +209,13 @@ input {
 }
 .j2c_hide {
 	display: none;
+}
+.checkbox-wrapper {
+	height: 1.9rem;
+}
+.convert-whitespace-to-char__input {
+	width: 3rem;
+	text-align: center;
 }
 
 /* Tab -> Info */

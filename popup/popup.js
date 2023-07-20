@@ -223,6 +223,21 @@ const Popup = {
 			settingsClearCacheAndStorageButton: document.querySelector(
 				".clear-storage-button"
 			),
+			link_contribute: document.getElementById("link_contribute"),
+			link_request_feature: document.getElementById(
+				"link_request_feature"
+			),
+			checkbox_convert_umlaute:
+				document.getElementById("convert_umlaute"),
+			checkbox_convert_to_lowercase: document.getElementById(
+				"convert_to_lowercase"
+			),
+			checkbox_convert_whitespace_to: document.getElementById(
+				"convert_whitespace_to"
+			),
+			input_whitespace_replacement: document.getElementById(
+				"convert_whitespace_to_char"
+			),
 		};
 
 		storageUtilFunctions.getData("story", function (data) {
@@ -398,6 +413,37 @@ const Popup = {
 			event.preventDefault();
 			chrome.tabs.create({ url: this.href });
 		});
+
+		el.link_contribute.addEventListener("click", function (event) {
+			event.preventDefault();
+			chrome.tabs.create({ url: this.href });
+		});
+
+		el.link_request_feature.addEventListener("click", function (event) {
+			event.preventDefault();
+			chrome.tabs.create({ url: this.href });
+		});
+
+		el.checkbox_convert_umlaute.addEventListener(
+			"change",
+			function (event) {
+				console.log(event.target.checked);
+			}
+		);
+
+		el.checkbox_convert_to_lowercase.addEventListener(
+			"change",
+			function (event) {
+				console.log(event.target.checked);
+			}
+		);
+
+		el.checkbox_convert_whitespace_to.addEventListener(
+			"change",
+			function (event) {
+				console.log(event.target.checked);
+			}
+		);
 
 		el.settingsClearCacheAndStorageButton.addEventListener(
 			"click",
