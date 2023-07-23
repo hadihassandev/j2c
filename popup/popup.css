@@ -25,7 +25,7 @@ body {
 }
 
 .body__popup {
-	min-width: 30rem;
+	min-width: 32rem;
 	max-width: 34rem;
 }
 
@@ -43,7 +43,7 @@ input {
 }
 
 /* Header */
-.sticky {
+.sticky-header {
 	position: sticky;
 	top: 0;
 }
@@ -225,6 +225,9 @@ input {
 	width: 3rem;
 	text-align: center;
 }
+.configuration-wrapper {
+	margin-bottom: 0.5rem;
+}
 
 /* Tab -> Info */
 .links-wrapper span {
@@ -276,3 +279,12 @@ input {
 }
 
 /* Footer */
+.sticky-footer {
+	position: sticky;
+	bottom: 0;
+	align-items: center;
+	border-top: 1px solid var(--color-border);
+	background: var(--color-background);
+	display: flex;
+	font-size: 0.75rem;
+}
