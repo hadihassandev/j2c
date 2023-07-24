@@ -5,6 +5,7 @@ const configStorageUtilFunctions = {
 			makeLowerCase: undefined,
 			convertWhitespaces: undefined,
 			whitespaceReplacementChar: undefined,
+			max_branchname_length: undefined,
 		};
 
 		let promises = [
@@ -36,14 +37,22 @@ const configStorageUtilFunctions = {
 				}
 				return value;
 			}),
+			storageUtilFunctions.getData(configurationsStorageKeys.maxBranchnameLength).then((value) => {
+				if (value === undefined) {
+					value = defaultConfigurations.maxBranchnameLength;
+					storageUtilFunctions.setData(configurationsStorageKeys.maxBranchnameLength, value);
+				}
+				return value;
+			}),
 		];
 
 		return Promise.all(promises).then(
-			([convertUmlaute, makeLowerCase, convertWhitespaces, whitespaceReplacementChar]) => {
+			([convertUmlaute, makeLowerCase, convertWhitespaces, whitespaceReplacementChar, maxBranchnameLength]) => {
 				data.convertUmlaute = convertUmlaute;
 				data.makeLowerCase = makeLowerCase;
 				data.convertWhitespaces = convertWhitespaces;
 				data.whitespaceReplacementChar = whitespaceReplacementChar;
+				data.maxBranchnameLength = maxBranchnameLength;
 				return data;
 			}
 		);
@@ -127,13 +136,14 @@ const storageUtilFunctions = {
 
 const issueUtilFunctions = {
 	transformToBranch: async function transformToBranch(xmlResponse) {
-		const MAX_LENGTH_OF_BRANCH_NAMES = 100; // TODO: make configurable
 		const type = await issueUtilFunctions.getTicketType(xmlResponse);
 		const key = issueUtilFunctions.getTicketKey(xmlResponse);
 		let summary = issueUtilFunctions.getTicketSummary(xmlResponse);
-		const parentkey = issueUtilFunctions.getTicketParent(xmlResponse); // TODO: make parent an option to put in pattern
+		const parentkey = issueUtilFunctions.getTicketParent(xmlResponse);
+		const link = issueUtilFunctions.getTicketLink(xmlResponse);
 
 		const configs = await configStorageUtilFunctions.getConfigurations();
+		const MAX_LENGTH_OF_BRANCH_NAMES = configs.maxBranchnameLength;
 
 		if (configs.convertUmlaute) {
 			summary = summary.replace(/ä/g, "ae");
@@ -159,6 +169,7 @@ const issueUtilFunctions = {
 			key: key,
 			summary: summary,
 			parentkey: parentkey,
+			link: link,
 		};
 
 		if (!values.parentkey) {
@@ -240,9 +251,17 @@ const issueUtilFunctions = {
 			return "";
 		}
 	},
+	getTicketLink: function getTicketLink(xmlResponse) {
+		const link = xmlResponse.getElementsByTagName("link");
+		if (!!link && link.length > 0 && link[1].childNodes.length > 0 && link[1].childNodes[0].nodeValue !== "") {
+			return link[1].childNodes[0].textContent;
+		} else {
+			return "";
+		}
+	},
 	shortenText: function shortenText(txt, limit) {
 		if (txt.length > limit) {
-			txt = txt.substr(0, limit - 5) + "-tldr";
+			txt = txt.substr(0, limit - 5);
 		}
 		return txt;
 	},

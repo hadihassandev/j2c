@@ -7,6 +7,10 @@
 .spacer {
 	flex-grow: 1;
 }
+.divider {
+	border-bottom: 1px solid var(--color-border);
+	margin: 0.5rem 0 0.5rem 0;
+}
 
 body {
 	overflow-x: hidden;
@@ -218,12 +222,15 @@ input {
 .j2c_hide {
 	display: none;
 }
-.checkbox-wrapper {
+.config-wrapper {
 	height: 1.9rem;
 }
 .convert-whitespace-to-char__input {
 	width: 3rem;
 	text-align: center;
+}
+.max_branchname_length__input {
+	width: 5rem;
 }
 .configuration-wrapper {
 	margin-bottom: 0.5rem;

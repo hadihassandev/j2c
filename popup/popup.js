@@ -5,6 +5,7 @@ function updatePatternExample(input, text) {
 		key: "XYZ-001",
 		summary: "I-am-a-summary",
 		parentkey: "ABC-001",
+		link: "https://example.com",
 	};
 	let branch = pattern;
 	const regex = /\$(\w+)/g;
@@ -42,6 +43,7 @@ const Popup = {
 			checkbox_convert_to_lowercase: document.getElementById("convert_to_lowercase"),
 			checkbox_convert_whitespace_to: document.getElementById("convert_whitespace_to"),
 			input_whitespace_replacement: document.getElementById("convert_whitespace_to_char"),
+			input_max_branchname_length: document.getElementById("max_branchname_length"),
 			version: document.getElementById("version"),
 		};
 
@@ -66,6 +68,7 @@ const Popup = {
 			el.checkbox_convert_to_lowercase.checked = configurations.makeLowerCase;
 			el.checkbox_convert_whitespace_to.checked = configurations.convertWhitespaces;
 			el.input_whitespace_replacement.value = configurations.whitespaceReplacementChar;
+			el.input_max_branchname_length.value = configurations.maxBranchnameLength;
 		});
 
 		el.tabs.forEach((tab, index) => {
@@ -243,6 +246,21 @@ const Popup = {
 
 		el.input_whitespace_replacement.addEventListener("input", function (event) {
 			storageUtilFunctions.setData(configurationsStorageKeys.whitespaceReplacementChar, event.target.value);
+			initBranchname();
+			chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+				const activeTabId = tabs[0].id;
+				chrome.tabs.sendMessage(activeTabId, { message: "reloadBranchName" }, (response) => {
+					if (chrome.runtime.lastError) {
+						console.log(chrome.runtime.lastError.message);
+					} else {
+						console.log(response);
+					}
+				});
+			});
+		});
+
+		el.input_max_branchname_length.addEventListener("input", function (event) {
+			storageUtilFunctions.setData(configurationsStorageKeys.maxBranchnameLength, event.target.value);
 			initBranchname();
 			chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
 				const activeTabId = tabs[0].id;

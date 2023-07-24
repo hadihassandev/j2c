@@ -85,7 +85,7 @@
 					<div class="pattern-wrapper tab-content-wrapper">
 						<span>Keys:</span>
 						<br />
-						<span>$type, $key, $summary, $parentkey</span>
+						<span>$type, $key, $summary, $parentkey, $link</span>
 						<br />
 						<input
 							id="pattern_input"
@@ -122,20 +122,20 @@
 					</div>
 					<div class="tab-content__title">Configuration</div>
 					<div class="configuration-wrapper tab-content-wrapper">
-						<div class="checkbox-wrapper">
+						<div class="config-wrapper">
 							<input type="checkbox" id="convert_umlaute" />
 							<label for="convert_umlaute"
 								>Convert (ä/Ä, ö/Ö, ü/Ü, ß) to (ae/Ae, oe/Oe,
 								ue/Ue, ss)</label
 							>
 						</div>
-						<div class="checkbox-wrapper">
+						<div class="config-wrapper">
 							<input type="checkbox" id="convert_to_lowercase" />
 							<label for="convert_to_lowercase"
 								>Make branchname lowercase</label
 							>
 						</div>
-						<div class="checkbox-wrapper">
+						<div class="config-wrapper">
 							<input type="checkbox" id="convert_whitespace_to" />
 							<label for="convert_whitespace_to"
 								>Replace whitespace with:
@@ -144,6 +144,18 @@
 								class="convert-whitespace-to-char__input"
 								id="convert_whitespace_to_char"
 								type="text"
+								spellcheck="false"
+							/>
+						</div>
+						<div class="divider"></div>
+						<div class="config-wrapper">
+							<label for="max_branchname_length"
+								>Max branch name length:
+							</label>
+							<input
+								class="max_branchname_length__input"
+								id="max_branchname_length"
+								type="number"
 								spellcheck="false"
 							/>
 						</div>

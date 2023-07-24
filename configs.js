@@ -19,6 +19,7 @@ const configurationsStorageKeys = {
 	makeLowerCase: "config_makeLowerCase",
 	convertWhitespaces: "config_convertWhitespaces",
 	whitespaceReplacementChar: "config_whitespaceReplacementChar",
+	maxBranchnameLength: "config_maxBranchnameLength",
 };
 
 const defaultConfigurations = {
@@ -26,4 +27,5 @@ const defaultConfigurations = {
 	makeLowerCase: false,
 	convertWhitespaces: true,
 	whitespaceReplacementChar: "-",
+	maxBranchnameLength: 100,
 };
