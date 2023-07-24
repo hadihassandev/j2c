@@ -41,7 +41,11 @@ const Popup = {
 			checkbox_convert_to_lowercase: document.getElementById("convert_to_lowercase"),
 			checkbox_convert_whitespace_to: document.getElementById("convert_whitespace_to"),
 			input_whitespace_replacement: document.getElementById("convert_whitespace_to_char"),
+			version: document.getElementById("version"),
 		};
+
+		let manifestData = chrome.runtime.getManifest();
+		el.version.textContent = "Version: " + manifestData.version;
 
 		typePrefixesStorageUtilFunctions.getStoryPrefix().then((prefix) => {
 			storyInputField.value = prefix;
@@ -60,6 +64,7 @@ const Popup = {
 			el.checkbox_convert_umlaute.checked = configurations.convertUmlaute;
 			el.checkbox_convert_to_lowercase.checked = configurations.makeLowerCase;
 			el.checkbox_convert_whitespace_to.checked = configurations.convertWhitespaces;
+			el.input_whitespace_replacement.value = configurations.whitespaceReplacementChar;
 		});
 
 		el.tabs.forEach((tab, index) => {

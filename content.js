@@ -102,43 +102,25 @@ const Content = {
 						});
 					});
 				// TODO: Future feature
-				// fetch(
-				// 	chrome.runtime.getURL(
-				// 		"injection/j2c_logo_injection/j2c_logo_injection.html"
-				// 	)
-				// )
+				// fetch(chrome.runtime.getURL("injection/j2c_logo_injection/j2c_logo_injection.html"))
 				// 	.then((response) => response.text())
 				// 	.then((html) => {
-				// 		const observer = new MutationObserver(
-				// 			(mutations, observer) => {
-				// 				const parentElement = document.querySelector(
-				// 					".aui-header-secondary"
-				// 				);
-				// 				const targetElement =
-				// 					parentElement.querySelector(".aui-nav");
-				// 				if (targetElement) {
-				// 					observer.disconnect();
-				// 					let firstChild = targetElement.children[0];
-				// 					let newElement =
-				// 						document.createElement("li");
-				// 					newElement.innerHTML = html;
-				// 					if (
-				// 						firstChild &&
-				// 						firstChild.nextElementSibling
-				// 					) {
-				// 						targetElement.insertBefore(
-				// 							newElement,
-				// 							firstChild.nextElementSibling
-				// 						);
-				// 					} else {
-				// 						targetElement.appendChild(newElement);
-				// 					}
-				// 					console.log(
-				// 						"J2C-Beta: J2C Logo HTML injected!"
-				// 					);
+				// 		const observer = new MutationObserver((mutations, observer) => {
+				// 			const parentElement = document.querySelector(".aui-header-secondary");
+				// 			const targetElement = parentElement.querySelector(".aui-nav");
+				// 			if (targetElement) {
+				// 				observer.disconnect();
+				// 				let firstChild = targetElement.children[0];
+				// 				let newElement = document.createElement("li");
+				// 				newElement.innerHTML = html;
+				// 				if (firstChild && firstChild.nextElementSibling) {
+				// 					targetElement.insertBefore(newElement, firstChild.nextElementSibling);
+				// 				} else {
+				// 					targetElement.appendChild(newElement);
 				// 				}
+				// 				console.log("J2C-Beta: J2C Logo HTML injected!");
 				// 			}
-				// 		);
+				// 		});
 				// 		observer.observe(document, {
 				// 			childList: true,
 				// 			subtree: true,
