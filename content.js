@@ -8,9 +8,9 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 const Content = {
 	async init() {
 		console.log("J2C-Beta: content.js initialising...");
-		storageUtilFunctions.getAllData(function (data) {
-			console.log(data);
-		});
+		// storageUtilFunctions.getAllData(function (data) {
+		// 	console.log(data);
+		// });
 		setTimeout(function () {
 			const currentUrl = window.location.href;
 			if (currentUrl.includes("https://tickets.soptim.de/browse/")) {

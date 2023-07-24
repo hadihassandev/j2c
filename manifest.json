@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "J2C-Beta",
-	"version": "4.2.0",
+	"version": "4.3.1",
 	"description": "Jira Utilities",
 	"icons": {
 		"16": "icons/J2C_logo_16px.png",
