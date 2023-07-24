@@ -11,3 +11,19 @@ const defaultTypePrefixes = {
 	bugDefaultPrefix: "bugfix",
 };
 const defaultPattern = "$type/$key/$summary";
+
+// ----------------------------------------------------------------
+
+const configurationsStorageKeys = {
+	convertUmlaute: "config_convertUmlaute",
+	makeLowerCase: "config_makeLowerCase",
+	convertWhitespaces: "config_convertWhitespaces",
+	whitespaceReplacementChar: "config_whitespaceReplacementChar",
+};
+
+const defaultConfigurations = {
+	convertUmlaute: true,
+	makeLowerCase: false,
+	convertWhitespaces: true,
+	whitespaceReplacementChar: "-",
+};

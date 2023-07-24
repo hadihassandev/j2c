@@ -1,3 +1,55 @@
+const configStorageUtilFunctions = {
+	getConfigurations: function () {
+		let data = {
+			convertUmlaute: undefined,
+			makeLowerCase: undefined,
+			convertWhitespaces: undefined,
+			whitespaceReplacementChar: undefined,
+		};
+
+		let promises = [
+			storageUtilFunctions.getData(configurationsStorageKeys.convertUmlaute).then((value) => {
+				if (value === undefined) {
+					value = defaultConfigurations.convertUmlaute;
+					storageUtilFunctions.setData(configurationsStorageKeys.convertUmlaute, value);
+				}
+				return value;
+			}),
+			storageUtilFunctions.getData(configurationsStorageKeys.makeLowerCase).then((value) => {
+				if (value === undefined) {
+					value = defaultConfigurations.makeLowerCase;
+					storageUtilFunctions.setData(configurationsStorageKeys.makeLowerCase, value);
+				}
+				return value;
+			}),
+			storageUtilFunctions.getData(configurationsStorageKeys.convertWhitespaces).then((value) => {
+				if (value === undefined) {
+					value = defaultConfigurations.convertWhitespaces;
+					storageUtilFunctions.setData(configurationsStorageKeys.convertWhitespaces, value);
+				}
+				return value;
+			}),
+			storageUtilFunctions.getData(configurationsStorageKeys.whitespaceReplacementChar).then((value) => {
+				if (value === undefined) {
+					value = defaultConfigurations.whitespaceReplacementChar;
+					storageUtilFunctions.setData(configurationsStorageKeys.whitespaceReplacementChar, value);
+				}
+				return value;
+			}),
+		];
+
+		return Promise.all(promises).then(
+			([convertUmlaute, makeLowerCase, convertWhitespaces, whitespaceReplacementChar]) => {
+				data.convertUmlaute = convertUmlaute;
+				data.makeLowerCase = makeLowerCase;
+				data.convertWhitespaces = convertWhitespaces;
+				data.whitespaceReplacementChar = whitespaceReplacementChar;
+				return data;
+			}
+		);
+	},
+};
+
 const typePrefixesStorageUtilFunctions = {
 	getStoryPrefix: function () {
 		return storageUtilFunctions.getData(typePrefixeStorageKeys.storyKey).then((value) => {
@@ -81,17 +133,26 @@ const issueUtilFunctions = {
 		let summary = issueUtilFunctions.getTicketSummary(xmlResponse);
 		const parent = issueUtilFunctions.getTicketParent(xmlResponse); // TODO: make parent an option to put in pattern
 
-		summary = summary.replace("ä", "ae"); // TODO: make optional
-		summary = summary.replace("ö", "oe");
-		summary = summary.replace("ü", "ue");
-		summary = summary.replace("Ä", "Ae");
-		summary = summary.replace("Ö", "Oe");
-		summary = summary.replace("Ü", "Ue");
-		summary = summary.replace("ß", "ss");
-		summary = summary.replace(/[^ a-zA-Z0-9]/gi, "-");
-		summary = summary.replace(/ /gi, "-");
+		const configs = await configStorageUtilFunctions.getConfigurations();
+
+		if (configs.convertUmlaute) {
+			summary = summary.replace(/ä/g, "ae");
+			summary = summary.replace(/ö/g, "oe");
+			summary = summary.replace(/ü/g, "ue");
+			summary = summary.replace(/Ä/g, "Ae");
+			summary = summary.replace(/Ö/g, "Oe");
+			summary = summary.replace(/Ü/g, "Ue");
+			summary = summary.replace(/ß/g, "ss");
+			summary = summary.replace(/[^ a-zA-Z0-9]/gi, "-");
+		} else {
+			summary = summary.replace(/[^ a-zA-Z0-9äöüÄÖÜß]/gi, "-");
+		}
+
+		if (configs.convertWhitespaces) {
+			summary = summary.replace(/ /gi, configs.whitespaceReplacementChar);
+		}
+
 		summary = summary.replace(/--+/gi, "-");
-		// summary = summary.replace(/\s/gi, "-");
 
 		const values = {
 			type: type,
@@ -108,6 +169,10 @@ const issueUtilFunctions = {
 				branch = branch.replace(regex, (match, placeholder) => values[placeholder]);
 
 				branch = issueUtilFunctions.shortenText(branch, MAX_LENGTH_OF_BRANCH_NAMES);
+
+				if (configs.makeLowerCase) {
+					branch = branch.toLowerCase();
+				}
 
 				resolve(branch);
 			});

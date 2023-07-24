@@ -56,6 +56,11 @@ const Popup = {
 			patternInputField.value = pattern;
 			updatePatternExample(patternInputField, patternExampleText);
 		});
+		configStorageUtilFunctions.getConfigurations().then((configurations) => {
+			el.checkbox_convert_umlaute.checked = configurations.convertUmlaute;
+			el.checkbox_convert_to_lowercase.checked = configurations.makeLowerCase;
+			el.checkbox_convert_whitespace_to.checked = configurations.convertWhitespaces;
+		});
 
 		el.tabs.forEach((tab, index) => {
 			tab.addEventListener("click", async () => {
@@ -186,15 +191,63 @@ const Popup = {
 		});
 
 		el.checkbox_convert_umlaute.addEventListener("change", function (event) {
-			console.log(event.target.checked);
+			storageUtilFunctions.setData(configurationsStorageKeys.convertUmlaute, event.target.checked);
+			initBranchname();
+			chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+				const activeTabId = tabs[0].id;
+				chrome.tabs.sendMessage(activeTabId, { message: "reloadBranchName" }, (response) => {
+					if (chrome.runtime.lastError) {
+						console.log(chrome.runtime.lastError.message);
+					} else {
+						console.log(response);
+					}
+				});
+			});
 		});
 
 		el.checkbox_convert_to_lowercase.addEventListener("change", function (event) {
-			console.log(event.target.checked);
+			storageUtilFunctions.setData(configurationsStorageKeys.makeLowerCase, event.target.checked);
+			initBranchname();
+			chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+				const activeTabId = tabs[0].id;
+				chrome.tabs.sendMessage(activeTabId, { message: "reloadBranchName" }, (response) => {
+					if (chrome.runtime.lastError) {
+						console.log(chrome.runtime.lastError.message);
+					} else {
+						console.log(response);
+					}
+				});
+			});
 		});
 
 		el.checkbox_convert_whitespace_to.addEventListener("change", function (event) {
-			console.log(event.target.checked);
+			storageUtilFunctions.setData(configurationsStorageKeys.convertWhitespaces, event.target.checked);
+			initBranchname();
+			chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+				const activeTabId = tabs[0].id;
+				chrome.tabs.sendMessage(activeTabId, { message: "reloadBranchName" }, (response) => {
+					if (chrome.runtime.lastError) {
+						console.log(chrome.runtime.lastError.message);
+					} else {
+						console.log(response);
+					}
+				});
+			});
+		});
+
+		el.input_whitespace_replacement.addEventListener("input", function (event) {
+			storageUtilFunctions.setData(configurationsStorageKeys.whitespaceReplacementChar, event.target.value);
+			initBranchname();
+			chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+				const activeTabId = tabs[0].id;
+				chrome.tabs.sendMessage(activeTabId, { message: "reloadBranchName" }, (response) => {
+					if (chrome.runtime.lastError) {
+						console.log(chrome.runtime.lastError.message);
+					} else {
+						console.log(response);
+					}
+				});
+			});
 		});
 
 		el.settingsClearCacheAndStorageButton.addEventListener("click", function (event) {
