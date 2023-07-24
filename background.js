@@ -4,17 +4,19 @@ chrome.runtime.onInstalled.addListener(function () {
 
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
 	if (changeInfo.url) {
-		chrome.tabs.sendMessage(
-			tabId,
-			{
-				message: "j2c_url_changed",
-				url: changeInfo.url,
-			},
-			function () {
-				if (chrome.runtime.lastError) {
-					console.log(chrome.runtime.lastError.message);
+		setTimeout(() => {
+			chrome.tabs.sendMessage(
+				tabId,
+				{
+					message: "j2c_url_changed",
+					url: changeInfo.url,
+				},
+				function () {
+					if (chrome.runtime.lastError) {
+						console.log(chrome.runtime.lastError.message);
+					}
 				}
-			}
-		);
+			);
+		}, 1000);
 	}
 });

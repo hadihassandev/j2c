@@ -12,7 +12,7 @@
 	"background": {
 		"scripts": ["background.js"]
 	},
-	"permissions": ["activeTab", "tabs", "storage"],
+	"permissions": ["https://tickets.soptim.de/*", "activeTab", "tabs", "storage"],
 	"content_scripts": [
 		{
 			"matches": ["<all_urls>"],
