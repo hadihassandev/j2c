@@ -131,7 +131,7 @@ const issueUtilFunctions = {
 		const type = await issueUtilFunctions.getTicketType(xmlResponse);
 		const key = issueUtilFunctions.getTicketKey(xmlResponse);
 		let summary = issueUtilFunctions.getTicketSummary(xmlResponse);
-		const parent = issueUtilFunctions.getTicketParent(xmlResponse); // TODO: make parent an option to put in pattern
+		const parentkey = issueUtilFunctions.getTicketParent(xmlResponse); // TODO: make parent an option to put in pattern
 
 		const configs = await configStorageUtilFunctions.getConfigurations();
 
@@ -158,8 +158,12 @@ const issueUtilFunctions = {
 			type: type,
 			key: key,
 			summary: summary,
-			parent: parent,
+			parentkey: parentkey,
 		};
+
+		if (!values.parentkey) {
+			values.parentkey = "Parent";
+		}
 
 		return new Promise((resolve, reject) => {
 			typePrefixesStorageUtilFunctions.getPattern().then((pattern) => {

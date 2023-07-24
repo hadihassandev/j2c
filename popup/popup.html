@@ -47,28 +47,7 @@
 
 			<div class="tab-contents">
 				<div class="tab-content">
-					<div class="tab-content__title">Current Branch</div>
-					<div class="current-branch-wrapper tab-content-wrapper">
-						<div class="current-branch-name__text-row-wrapper">
-							<span>Branch Name:</span>
-							<div class="copied-tooltip j2c_hide">
-								<span>Copied!</span>
-							</div>
-						</div>
-						<div class="current-branch-name__row-wrapper">
-							<input
-								id="current_branch_name_input"
-								type="text"
-								value=""
-								spellcheck="false"
-							/>
-							<div id="copy_button" class="copy-button-wrapper">
-								<a role="button" class="copy-button">
-									<span class="copy-button__icon"></span>
-								</a>
-							</div>
-						</div>
-					</div>
+					
 					<div class="tab-content__title">Prefixes</div>
 					<div class="prefixes-wrapper tab-content-wrapper">
 						<div class="prefix__row">
@@ -106,7 +85,7 @@
 					<div class="pattern-wrapper tab-content-wrapper">
 						<span>Keys:</span>
 						<br />
-						<span>$type, $key, $summary</span>
+						<span>$type, $key, $summary, $parentkey</span>
 						<br />
 						<input
 							id="pattern_input"
@@ -118,6 +97,28 @@
 							class="pattern__example-text__soft-text"
 							>Example:
 						</span>
+					</div>
+					<div class="tab-content__title">Current Branch</div>
+					<div class="current-branch-wrapper tab-content-wrapper">
+						<div class="current-branch-name__text-row-wrapper">
+							<span>Branch Name:</span>
+							<div class="copied-tooltip j2c_hide">
+								<span>Copied!</span>
+							</div>
+						</div>
+						<div class="current-branch-name__row-wrapper">
+							<input
+								id="current_branch_name_input"
+								type="text"
+								value=""
+								spellcheck="false"
+							/>
+							<div id="copy_button" class="copy-button-wrapper">
+								<a role="button" class="copy-button">
+									<span class="copy-button__icon"></span>
+								</a>
+							</div>
+						</div>
 					</div>
 					<div class="tab-content__title">Configuration</div>
 					<div class="configuration-wrapper tab-content-wrapper">

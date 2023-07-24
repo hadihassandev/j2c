@@ -4,6 +4,7 @@ function updatePatternExample(input, text) {
 		type: "Story",
 		key: "XYZ-001",
 		summary: "I-am-a-summary",
+		parentkey: "ABC-001",
 	};
 	let branch = pattern;
 	const regex = /\$(\w+)/g;
