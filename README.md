@@ -4,7 +4,7 @@
   </a>
 
   <h3 align="center">J2C-Beta</h3>
-  <h5 align="center">4.3.1</h5>
+  <h5 align="center">4.3.2</h5>
 
   <p align="center">
     Browser Extension with utilities for Jira
