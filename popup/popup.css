@@ -223,9 +223,9 @@ input {
 	display: none;
 }
 .config-wrapper {
-	height: 1.9rem;
+	height: 2rem;
 }
-.convert-whitespace-to-char__input {
+.config-input--small {
 	width: 3rem;
 	text-align: center;
 }

@@ -2,6 +2,8 @@ const configStorageUtilFunctions = {
 	getConfigurations: function () {
 		let data = {
 			convertUmlaute: undefined,
+			convertSpecialCharacters: undefined,
+			specialCharactersReplacementChar: undefined,
 			makeLowerCase: undefined,
 			convertWhitespaces: undefined,
 			whitespaceReplacementChar: undefined,
@@ -13,6 +15,20 @@ const configStorageUtilFunctions = {
 				if (value === undefined) {
 					value = defaultConfigurations.convertUmlaute;
 					storageUtilFunctions.setData(configurationsStorageKeys.convertUmlaute, value);
+				}
+				return value;
+			}),
+			storageUtilFunctions.getData(configurationsStorageKeys.convertSpecialCharacters).then((value) => {
+				if (value === undefined) {
+					value = defaultConfigurations.convertSpecialCharacters;
+					storageUtilFunctions.setData(configurationsStorageKeys.convertSpecialCharacters, value);
+				}
+				return value;
+			}),
+			storageUtilFunctions.getData(configurationsStorageKeys.specialCharactersReplacementChar).then((value) => {
+				if (value === undefined) {
+					value = defaultConfigurations.specialCharactersReplacementChar;
+					storageUtilFunctions.setData(configurationsStorageKeys.specialCharactersReplacementChar, value);
 				}
 				return value;
 			}),
@@ -47,8 +63,18 @@ const configStorageUtilFunctions = {
 		];
 
 		return Promise.all(promises).then(
-			([convertUmlaute, makeLowerCase, convertWhitespaces, whitespaceReplacementChar, maxBranchnameLength]) => {
+			([
+				convertUmlaute,
+				convertSpecialCharacters,
+				specialCharactersReplacementChar,
+				makeLowerCase,
+				convertWhitespaces,
+				whitespaceReplacementChar,
+				maxBranchnameLength,
+			]) => {
 				data.convertUmlaute = convertUmlaute;
+				data.convertSpecialCharacters = convertSpecialCharacters;
+				data.specialCharactersReplacementChar = specialCharactersReplacementChar;
 				data.makeLowerCase = makeLowerCase;
 				data.convertWhitespaces = convertWhitespaces;
 				data.whitespaceReplacementChar = whitespaceReplacementChar;
@@ -153,9 +179,13 @@ const issueUtilFunctions = {
 			summary = summary.replace(/Ö/g, "Oe");
 			summary = summary.replace(/Ü/g, "Ue");
 			summary = summary.replace(/ß/g, "ss");
-			summary = summary.replace(/[^ a-zA-Z0-9]/gi, "-");
+			summary = summary.replace(/[^ a-zA-Z0-9"/()]/gi, "-");
 		} else {
-			summary = summary.replace(/[^ a-zA-Z0-9äöüÄÖÜß]/gi, "-");
+			summary = summary.replace(/[^ a-zA-Z0-9äöüÄÖÜß"/()]/gi, "-");
+		}
+
+		if (configs.convertSpecialCharacters) {
+			summary = summary.replace(/[ \/()"']/gi, configs.specialCharactersReplacementChar);
 		}
 
 		if (configs.convertWhitespaces) {

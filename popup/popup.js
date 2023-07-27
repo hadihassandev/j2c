@@ -43,6 +43,10 @@ const Popup = {
 			checkbox_convert_to_lowercase: document.getElementById("convert_to_lowercase"),
 			checkbox_convert_whitespace_to: document.getElementById("convert_whitespace_to"),
 			input_whitespace_replacement: document.getElementById("convert_whitespace_to_char"),
+			checkbox_convert_special_characters: document.getElementById("convert_special_characters"),
+			input_convert_special_characters_replacement: document.getElementById(
+				"convert_special_characters_replacement"
+			),
 			input_max_branchname_length: document.getElementById("max_branchname_length"),
 			version: document.getElementById("version"),
 		};
@@ -65,6 +69,8 @@ const Popup = {
 		});
 		configStorageUtilFunctions.getConfigurations().then((configurations) => {
 			el.checkbox_convert_umlaute.checked = configurations.convertUmlaute;
+			el.checkbox_convert_special_characters.checked = configurations.convertSpecialCharacters;
+			el.input_convert_special_characters_replacement.value = configurations.specialCharactersReplacementChar;
 			el.checkbox_convert_to_lowercase.checked = configurations.makeLowerCase;
 			el.checkbox_convert_whitespace_to.checked = configurations.convertWhitespaces;
 			el.input_whitespace_replacement.value = configurations.whitespaceReplacementChar;
@@ -246,6 +252,39 @@ const Popup = {
 
 		el.input_whitespace_replacement.addEventListener("input", function (event) {
 			storageUtilFunctions.setData(configurationsStorageKeys.whitespaceReplacementChar, event.target.value);
+			initBranchname();
+			chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+				const activeTabId = tabs[0].id;
+				chrome.tabs.sendMessage(activeTabId, { message: "reloadBranchName" }, (response) => {
+					if (chrome.runtime.lastError) {
+						console.log(chrome.runtime.lastError.message);
+					} else {
+						console.log(response);
+					}
+				});
+			});
+		});
+
+		el.checkbox_convert_special_characters.addEventListener("change", function (event) {
+			storageUtilFunctions.setData(configurationsStorageKeys.convertSpecialCharacters, event.target.checked);
+			initBranchname();
+			chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+				const activeTabId = tabs[0].id;
+				chrome.tabs.sendMessage(activeTabId, { message: "reloadBranchName" }, (response) => {
+					if (chrome.runtime.lastError) {
+						console.log(chrome.runtime.lastError.message);
+					} else {
+						console.log(response);
+					}
+				});
+			});
+		});
+
+		el.input_convert_special_characters_replacement.addEventListener("input", function (event) {
+			storageUtilFunctions.setData(
+				configurationsStorageKeys.specialCharactersReplacementChar,
+				event.target.value
+			);
 			initBranchname();
 			chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
 				const activeTabId = tabs[0].id;

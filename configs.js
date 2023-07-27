@@ -16,6 +16,8 @@ const defaultPattern = "$type/$key/$summary";
 
 const configurationsStorageKeys = {
 	convertUmlaute: "config_convertUmlaute",
+	convertSpecialCharacters: "config_convertSpecialCharacters",
+	specialCharactersReplacementChar: "config_specialCharactersReplacementChar",
 	makeLowerCase: "config_makeLowerCase",
 	convertWhitespaces: "config_convertWhitespaces",
 	whitespaceReplacementChar: "config_whitespaceReplacementChar",
@@ -24,6 +26,8 @@ const configurationsStorageKeys = {
 
 const defaultConfigurations = {
 	convertUmlaute: true,
+	convertSpecialCharacters: true,
+	specialCharactersReplacementChar: "-",
 	makeLowerCase: false,
 	convertWhitespaces: true,
 	whitespaceReplacementChar: "-",
