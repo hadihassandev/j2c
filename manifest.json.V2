@@ -1,0 +1,41 @@
+{
+	"manifest_version": 2,
+	"name": "J2C-Beta",
+	"version": "4.3.1",
+	"description": "Jira Utilities",
+	"icons": {
+		"16": "icons/J2C_logo_16px.png",
+		"32": "icons/J2C_logo.svg",
+		"48": "icons/J2C_logo.svg",
+		"128": "icons/J2C_logo.svg"
+	},
+	"background": {
+		"scripts": ["background.js"]
+	},
+	"permissions": ["https://tickets.soptim.de/*", "activeTab", "tabs", "storage"],
+	"content_scripts": [
+		{
+			"matches": ["<all_urls>"],
+			"js": ["configs.js", "utils.js", "content.js"],
+			"css": ["injection/branch_name_injection/injection.css"],
+			"run_at": "document_end"
+		}
+	],
+	"browser_action": {
+		"default_popup": "popup/popup.html"
+	},
+	"commands": {
+		"my-command": {
+			"suggested_key": {
+				"default": "Alt+Shift+C"
+			},
+			"description": "Test Command"
+		}
+	},
+	"web_accessible_resources": [
+		"injection/branch_name_injection/branch_name_injection.html",
+		"injection/j2c_logo_injection/j2c_logo_injection.html",
+		"global.css",
+		"content.js"
+	]
+}
