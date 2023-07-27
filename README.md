@@ -9,12 +9,12 @@
   <p align="center">
     Browser Extension with utilities for Jira
     <br />
-    <a href="https://chrome.google.com/webstore/detail/j2c-beta/pgldjpjldfkaaeineapgfoeikdibkaca?hl=de&authuser=0"><strong>Explore the docs »</strong></a>
+    <a href="#"><strong>Explore the docs »</strong></a>
     <br />
     <br />
     <a href="https://chrome.google.com/webstore/detail/j2c-beta/pgldjpjldfkaaeineapgfoeikdibkaca?hl=de&authuser=0">Get Extension for Chrome</a>
     .
-    <a href="">Get Extension for Edge</a>
+    <a href="https://chrome.google.com/webstore/detail/j2c-beta/pgldjpjldfkaaeineapgfoeikdibkaca?hl=de&authuser=0">Get Extension for Edge</a>
     .
     <a href="https://addons.mozilla.org/de/firefox/addon/j2c-beta/">Get Extension for Firefox</a>
     <br />
