@@ -1,87 +1,24 @@
 const configStorageUtilFunctions = {
 	getConfigurations: function () {
-		let data = {
-			convertUmlaute: undefined,
-			convertSpecialCharacters: undefined,
-			specialCharactersReplacementChar: undefined,
-			makeLowerCase: undefined,
-			convertWhitespaces: undefined,
-			whitespaceReplacementChar: undefined,
-			max_branchname_length: undefined,
-		};
+		let data = {};
 
-		let promises = [
-			storageUtilFunctions.getData(configurationsStorageKeys.convertUmlaute).then((value) => {
+		const configKeys = Object.keys(configurationsStorageKeys);
+		const promises = configKeys.map((configKey) => {
+			return storageUtilFunctions.getData(configurationsStorageKeys[configKey]).then((value) => {
 				if (value === undefined) {
-					value = defaultConfigurations.convertUmlaute;
-					storageUtilFunctions.setData(configurationsStorageKeys.convertUmlaute, value);
+					value = defaultConfigurations[configKey];
+					storageUtilFunctions.setData(configurationsStorageKeys[configKey], value);
 				}
 				return value;
-			}),
-			storageUtilFunctions.getData(configurationsStorageKeys.convertSpecialCharacters).then((value) => {
-				if (value === undefined) {
-					value = defaultConfigurations.convertSpecialCharacters;
-					storageUtilFunctions.setData(configurationsStorageKeys.convertSpecialCharacters, value);
-				}
-				return value;
-			}),
-			storageUtilFunctions.getData(configurationsStorageKeys.specialCharactersReplacementChar).then((value) => {
-				if (value === undefined) {
-					value = defaultConfigurations.specialCharactersReplacementChar;
-					storageUtilFunctions.setData(configurationsStorageKeys.specialCharactersReplacementChar, value);
-				}
-				return value;
-			}),
-			storageUtilFunctions.getData(configurationsStorageKeys.makeLowerCase).then((value) => {
-				if (value === undefined) {
-					value = defaultConfigurations.makeLowerCase;
-					storageUtilFunctions.setData(configurationsStorageKeys.makeLowerCase, value);
-				}
-				return value;
-			}),
-			storageUtilFunctions.getData(configurationsStorageKeys.convertWhitespaces).then((value) => {
-				if (value === undefined) {
-					value = defaultConfigurations.convertWhitespaces;
-					storageUtilFunctions.setData(configurationsStorageKeys.convertWhitespaces, value);
-				}
-				return value;
-			}),
-			storageUtilFunctions.getData(configurationsStorageKeys.whitespaceReplacementChar).then((value) => {
-				if (value === undefined) {
-					value = defaultConfigurations.whitespaceReplacementChar;
-					storageUtilFunctions.setData(configurationsStorageKeys.whitespaceReplacementChar, value);
-				}
-				return value;
-			}),
-			storageUtilFunctions.getData(configurationsStorageKeys.maxBranchnameLength).then((value) => {
-				if (value === undefined) {
-					value = defaultConfigurations.maxBranchnameLength;
-					storageUtilFunctions.setData(configurationsStorageKeys.maxBranchnameLength, value);
-				}
-				return value;
-			}),
-		];
+			});
+		});
 
-		return Promise.all(promises).then(
-			([
-				convertUmlaute,
-				convertSpecialCharacters,
-				specialCharactersReplacementChar,
-				makeLowerCase,
-				convertWhitespaces,
-				whitespaceReplacementChar,
-				maxBranchnameLength,
-			]) => {
-				data.convertUmlaute = convertUmlaute;
-				data.convertSpecialCharacters = convertSpecialCharacters;
-				data.specialCharactersReplacementChar = specialCharactersReplacementChar;
-				data.makeLowerCase = makeLowerCase;
-				data.convertWhitespaces = convertWhitespaces;
-				data.whitespaceReplacementChar = whitespaceReplacementChar;
-				data.maxBranchnameLength = maxBranchnameLength;
-				return data;
-			}
-		);
+		return Promise.all(promises).then((values) => {
+			configKeys.forEach((configKey, index) => {
+				data[configKey] = values[index];
+			});
+			return data;
+		});
 	},
 };
 
@@ -185,7 +122,7 @@ const issueUtilFunctions = {
 		}
 
 		if (configs.convertSpecialCharacters) {
-			summary = summary.replace(/[ \/()"']/gi, configs.specialCharactersReplacementChar);
+			summary = summary.replace(/[\/()"']/gi, configs.specialCharactersReplacementChar);
 		}
 
 		if (configs.convertWhitespaces) {
